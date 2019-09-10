@@ -1,6 +1,7 @@
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 
 import { SearchHistoryComponent } from './search-history.component';
+import { OrderByDatePipe } from './order-by-date.pipe';
 
 describe('SearchHistoryComponent', () => {
   let component: SearchHistoryComponent;
@@ -8,7 +9,7 @@ describe('SearchHistoryComponent', () => {
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [ SearchHistoryComponent ]
+      declarations: [ SearchHistoryComponent, OrderByDatePipe ]
     })
     .compileComponents();
   }));

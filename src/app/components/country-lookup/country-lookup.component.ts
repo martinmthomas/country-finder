@@ -17,7 +17,7 @@ export class CountryLookupComponent implements OnInit, OnChanges {
   @Output() countrySelected: EventEmitter<Country> = new EventEmitter<Country>();
 
   constructor(private countryService: CountryService,
-    private searchHistoryService: SearchHistoryService) { }
+              private searchHistoryService: SearchHistoryService) { }
 
   ngOnInit() {
   }
