@@ -1,0 +1,15 @@
+<div class="card">
+  <img [src]="selectedCountry.flag" class="card-img-top flag ml-3 mt-4" alt="selectedCountry.name">
+  <div class="card-body">
+    <h5 class="card-title">{{selectedCountry.name}}</h5>
+    <span class="card-text">
+      <p>Currencies:
+        <span *ngFor="let currency of selectedCountry.currencies">
+          {{currency.name}} ({{currency.symbol}})
+        </span>
+      </p>
+      <p>Lat, Long: {{selectedCountry.latlng}}</p>
+      <p>Land Area: {{selectedCountry.area | number}} km<sup>2</sup></p>
+    </span>
+  </div>
+</div>

@@ -1,0 +1,8 @@
+<div class="form-group">
+  <label for="country-lookup" class="col-form-label col-form-label-sm">Search for a country:</label>
+  <div class="">
+    <input id="country-lookup" type="text" class="form-control form-control-sm" [(ngModel)]="country"
+      [ngbTypeahead]="searchCountry" [inputFormatter]="inputFormatter" [resultFormatter]="resultFormatter" 
+      (selectItem)="onCountrySelected($event)"/>
+  </div>
+</div>
