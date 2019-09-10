@@ -13,7 +13,7 @@ export class SearchHistoryComponent implements OnInit {
 
   @Output() itemSelected: EventEmitter<Country> = new EventEmitter<Country>();
 
-  constructor(private searchHistoryService: SearchHistoryService) { }
+  constructor(public searchHistoryService: SearchHistoryService) { }
 
   ngOnInit() {
   }
