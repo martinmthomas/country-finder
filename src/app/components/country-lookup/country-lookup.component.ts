@@ -1,6 +1,6 @@
 import { Component, OnInit, Output, EventEmitter, OnChanges, SimpleChanges } from '@angular/core';
-import { Observable, of, merge, zip } from 'rxjs';
-import { distinctUntilChanged, map, take, toArray, switchMap, catchError, tap, mergeMap, filter, distinct } from 'rxjs/operators';
+import { Observable, of, zip } from 'rxjs';
+import { distinctUntilChanged, catchError, mergeMap, map } from 'rxjs/operators';
 import { CountryService } from '../../services/country.service';
 import { Country } from '../../models/country';
 import { SearchHistoryService } from 'src/app/services/search-history.service';
@@ -33,21 +33,49 @@ export class CountryLookupComponent implements OnInit, OnChanges {
     text.pipe(
       distinctUntilChanged(),
       mergeMap(t => this.getCountries(t)),
-      distinct(),
-      map(countries => countries.slice(0, 10)),
+      map(countries => this.distinctCountries(countries)),
+      map(distCountries => distCountries.slice(0, 10))
     )
+
+
+  distinctCountries(countries: Country[]) {
+    const result = new Array<Country>();
+
+    for (const country of countries) {
+      let added = false;
+
+      for (const addedCountry of result) {
+        if (addedCountry.name === country.name) {
+          added = true;
+          break;
+        }
+      }
+
+      if (!added) {
+        result.push(country);
+      }
+    }
+    return result;
+  }
 
   getCountries(text: string): Observable<Country[]> {
     if (text.length < 3) {
       return of([]);
     } else {
       const countriesByName = this.countryService.getCountriesByName(text)
-        .pipe(catchError(err => of([])));
-      return countriesByName;
-      // const countriesByCode = this.countryService.getCountriesByCode(text)
-      //   .pipe(catchError(err => of([])));
-      // return zip(countriesByName, countriesByCode)
-      //   .pipe(map(cs => cs[0].concat(cs[1])));
+        .pipe(catchError(err => {
+          console.log(err);
+          return of([]);
+        }));
+
+      const countriesByCode = this.countryService.getCountriesByCode(text)
+        .pipe(catchError(err => {
+          console.log(err);
+          return of([]);
+        }));
+
+      return zip(countriesByName, countriesByCode)
+        .pipe(map(cs => cs[0].concat(cs[1])));
     }
   }
 
