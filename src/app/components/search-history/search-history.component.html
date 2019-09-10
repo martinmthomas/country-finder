@@ -2,11 +2,11 @@
   Searched Countries:
 </h6>
 <div class="list-group list-group-flush history-scroll">
-  <a href="#" class="list-group-item list-group-item-action"
+  <button type="button" class="list-group-item list-group-item-action"
     *ngFor="let item of (searchHistoryService.searchedCountries | orderByDate)" (click)="onItemSelected(item)">
     {{item.name}} - {{item.details.alpha3Code}}
     <span class="float-right text-muted"><small>({{item.lastAccessed.fromNow()}})</small></span>
-  </a>
+  </button>
   <div *ngIf="searchHistoryService.searchedCountries.length == 0">
     <small>
       <i>

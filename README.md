@@ -4,7 +4,7 @@ CountryFinder is written as an Angular (7.2.15) application.
 
 ## Prerequisites
 
-To set up once development environment, install `node package manager` and `Angular CLI 7.3.9`
+To set up the development environment, install `node package manager` and `Angular CLI 7.3.9`
 
 ## Getting Started
 
